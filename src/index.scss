@@ -1,0 +1,21 @@
+@import './sassStyles/variables';
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  src: local('JetBrainsMono')
+    url('./assets/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
+}
+body {
+  background-color: $black;
+  margin: 0 auto;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'JetBrainsMono', 'Courier New', monospace;
+}
+
+code {
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
+  font-family: 'JetBrainsMono', 'Courier New', monospace;
+}
