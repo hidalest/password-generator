@@ -1,16 +1,21 @@
 import React from 'react';
+import Card from '../ui/Card';
 import style from './DisplayPassword.module.scss';
 
 const DisplayPassword = ({
   password = 'P4$5W0rD!',
 }: DisplayPasswordInterface) => {
   return (
-    <div className={style.password}>
-      <h1>{password}</h1>
+    <Card className='test'>
+      <input
+        type='text'
+        placeholder={password}
+        className={style.passwordInput}
+      />
       <button className={style.copyPasswordBtn}>
         <span className='material-symbols-outlined'>file_copy</span>
       </button>
-    </div>
+    </Card>
   );
 };
 

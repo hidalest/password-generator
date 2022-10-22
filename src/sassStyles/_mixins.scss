@@ -14,3 +14,14 @@ $desktop: 1800px;
     @content;
   }
 }
+
+@mixin buttonAnimation($color) {
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    color: $color;
+    transform: translateY(-1px);
+    transition: all 0.25s ease-out;
+    background-color: transparent;
+  }
+}
