@@ -5,9 +5,14 @@
   src: local('JetBrainsMono')
     url('./assets/fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype');
 }
+
+html {
+  font-size: 10px;
+}
+
 body {
   background-color: $black;
-  margin: 0 auto;
+  margin: 10rem auto;
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

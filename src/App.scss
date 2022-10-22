@@ -1,6 +1,14 @@
 @import './sassStyles/variables';
+@import './sassStyles/mixins';
 
 .app {
   background-color: $black;
   color: $white;
+  width: 90%;
+  max-width: 540px;
+  margin: 0 auto;
+
+  &_title {
+    color: $grey;
+  }
 }
