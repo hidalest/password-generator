@@ -9,7 +9,7 @@ interface CheckboxInterface {
 const Checkbox = ({ label, onChange }: CheckboxInterface) => {
   return (
     <label className={classes.container}>
-      <input type='checkbox' onChange={onChange} />
+      <input type='checkbox' onChange={onChange} defaultChecked />
       <span className={classes.checkmark}></span>
       {label}
     </label>
