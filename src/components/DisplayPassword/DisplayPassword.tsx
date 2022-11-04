@@ -1,10 +1,8 @@
 import React from 'react';
-import Card from '../ui/Card';
+import Card from '../ui/Card/Card';
 import style from './DisplayPassword.module.scss';
 
-const DisplayPassword = ({
-  password = 'P4$5W0rD!',
-}: DisplayPasswordInterface) => {
+const DisplayPassword = ({ password }: DisplayPasswordInterface) => {
   return (
     <Card className='test'>
       <input
