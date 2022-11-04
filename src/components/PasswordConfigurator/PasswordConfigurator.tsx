@@ -1,70 +1,70 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import Checkbox from '../ui/Checkbox/Checkbox';
-import classes from './PasswordConfigurator.module.scss';
+import { ChangeEvent, FormEvent, useState } from "react";
+import Checkbox from "../ui/Checkbox/Checkbox";
+import classes from "./PasswordConfigurator.module.scss";
 
 const uppercaseLetters = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'O',
-  'P',
-  'Q',
-  'R',
-  'S',
-  'T',
-  'U',
-  'V',
-  'W',
-  'X',
-  'Y',
-  'Z',
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
 ];
 
 const lowercaseLetters = uppercaseLetters.map((letter) => letter.toLowerCase());
 
 const symbols = [
-  '~',
-  '`',
-  '!',
-  '@',
-  '#',
-  '$',
-  '%',
-  '^',
-  '&',
-  '*',
-  '(',
-  ')',
-  '_',
-  '-',
-  '+',
-  '=',
-  '{',
-  '[',
-  '}',
-  ']',
-  '|',
-  ':',
-  ';',
-  '<',
-  '>',
-  '.',
-  '?',
-  '/',
+  "~",
+  "`",
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "_",
+  "-",
+  "+",
+  "=",
+  "{",
+  "[",
+  "}",
+  "]",
+  "|",
+  ":",
+  ";",
+  "<",
+  ">",
+  ".",
+  "?",
+  "/",
 ];
 
-const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 const passwordElements = [uppercaseLetters, symbols, numbers];
 
@@ -109,12 +109,18 @@ const createPassword = (
     );
   } while (passwordCharacters.length + 1 <= length);
 
-  console.log(passwordCharacters.join(''));
-  return passwordCharacters.join('');
+  console.log(passwordCharacters.join(""));
+  return passwordCharacters.join("");
 };
 
-const PasswordConfigurator = () => {
-  const [lengthValue, setLengthValue] = useState('5');
+interface PasswordConfiguratorInterface {
+  passwordCreated: (passwordCreated: string) => void;
+}
+
+const PasswordConfigurator = ({
+  passwordCreated,
+}: PasswordConfiguratorInterface): JSX.Element => {
+  const [lengthValue, setLengthValue] = useState("5");
   const [passwordConditionals, setPasswordConditionals] = useState({
     useUppercase: true,
     useLowercase: true,
@@ -149,39 +155,40 @@ const PasswordConfigurator = () => {
 
   const onSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createPassword(+lengthValue, passwordConditionals);
+    const createdPassword = createPassword(+lengthValue, passwordConditionals);
+    passwordCreated(createdPassword);
   };
 
   return (
     <form className={classes.configurator} onSubmit={onSubmitForm}>
       <div className={classes.range}>
-        <label htmlFor='password-range' className={classes['range-label']}>
+        <label htmlFor="password-range" className={classes["range-label"]}>
           <h3>Character Length</h3>
           <span>{lengthValue}</span>
         </label>
         <input
-          className={classes['range-range']}
-          id='password-length'
+          className={classes["range-range"]}
+          id="password-length"
           max={20}
           min={5}
-          name='password-length'
+          name="password-length"
           onChange={onLengthChange}
-          type='range'
+          type="range"
           value={lengthValue}
         />
       </div>
 
       <div className={classes.checkboxGroup}>
         <Checkbox
-          label={'Include Uppercase Letters'}
+          label={"Include Uppercase Letters"}
           onChange={onUpperCaseActive}
         />
         <Checkbox
-          label={'Include Lowercase Letters'}
+          label={"Include Lowercase Letters"}
           onChange={onLowerCaseActive}
         />
-        <Checkbox label={'Include Numbers'} onChange={onNumbersActive} />
-        <Checkbox label={'Include Symbols'} onChange={onSymbolsActive} />
+        <Checkbox label={"Include Numbers"} onChange={onNumbersActive} />
+        <Checkbox label={"Include Symbols"} onChange={onSymbolsActive} />
       </div>
 
       <button>Generate</button>

@@ -1,5 +1,5 @@
-import React from 'react';
-import classes from './Checkbox.module.scss';
+import React from "react";
+import classes from "./Checkbox.module.scss";
 
 interface CheckboxInterface {
   label: string;
@@ -9,7 +9,7 @@ interface CheckboxInterface {
 const Checkbox = ({ label, onChange }: CheckboxInterface) => {
   return (
     <label className={classes.container}>
-      <input type='checkbox' onChange={onChange} defaultChecked />
+      <input type="checkbox" onChange={onChange} defaultChecked />
       <span className={classes.checkmark}></span>
       {label}
     </label>
