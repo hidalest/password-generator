@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import StrengthBar from "../ui/StrengthBar/StrengthBar";
+import classes from "./PasswordMeasure.module.scss";
 
 interface passwordMeasureInterface {
   passwordLength: number;
@@ -29,51 +30,53 @@ const PasswordMeasure = ({
     passwordLength >= 8;
 
   const mediumPassword =
-    useUppercase &&
-    useLowercase &&
+    (useUppercase || useLowercase) &&
     !useSymbols &&
     useNumbers &&
     passwordLength >= 8;
 
   const weakPassword =
-    useUppercase &&
-    useLowercase &&
+    (useUppercase || useLowercase) &&
     !useSymbols &&
     useNumbers &&
     passwordLength <= 6;
 
   const tooWeakPassword =
-    useUppercase &&
-    useLowercase &&
-    !useSymbols &&
-    !useNumbers &&
-    passwordLength <= 6;
+    (useUppercase || useLowercase) && !useSymbols && !useNumbers;
 
-  const passwordChecker = () => {
+  const passwordChecker = useCallback(() => {
+    let category: "medium" | "strong" | "weak" | "too-weak" = "medium";
     if (strongPassword) {
-      setPasswordStrength("strong");
-      return;
+      category = "strong";
     } else if (mediumPassword) {
-      setPasswordStrength("medium");
-      return;
+      category = "medium";
     } else if (weakPassword) {
-      setPasswordStrength("weak");
-      return;
+      category = "weak";
+    } else if (tooWeakPassword) {
+      category = "too-weak";
     } else {
-      setPasswordStrength("too-weak");
-      return;
+      category = "weak";
     }
-  };
+    return category;
+  }, [mediumPassword, strongPassword, weakPassword, tooWeakPassword]);
+
+  useEffect(() => {
+    const category = passwordChecker();
+    setPasswordStrength(category);
+  }, [passwordChecker]);
 
   passwordChecker();
 
   return (
-    <section>
+    <section className={classes.container}>
       <h3>Strength</h3>
-      <StrengthBar position={1} passwordStrength={passwordStrength} />
-      <StrengthBar position={2} passwordStrength={passwordStrength} />
-      <StrengthBar position={3} passwordStrength={passwordStrength} />
-      <StrengthBar position={4} passwordStrength={passwordStrength} />
+      <div className={classes.barsContainer}>
+        <p className={classes["barsContainer--text"]}>{passwordStrength}</p>
+        <StrengthBar position={1} passwordStrength={passwordStrength} />
+        <StrengthBar position={2} passwordStrength={passwordStrength} />
+        <StrengthBar position={3} passwordStrength={passwordStrength} />
+        <StrengthBar position={4} passwordStrength={passwordStrength} />
+      </div>
     </section>
   );
 };
