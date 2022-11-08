@@ -1,72 +1,71 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import Checkbox from "../ui/Checkbox/Checkbox";
-import classes from "./PasswordConfigurator.module.scss";
+import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
+import Checkbox from '../ui/Checkbox/Checkbox';
+import classes from './PasswordConfigurator.module.scss';
+import PasswordMeasure from '../PasswordMeasure/PasswordMeasure';
 
 const uppercaseLetters = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
 ];
 
 const lowercaseLetters = uppercaseLetters.map((letter) => letter.toLowerCase());
 
 const symbols = [
-  "~",
-  "`",
-  "!",
-  "@",
-  "#",
-  "$",
-  "%",
-  "^",
-  "&",
-  "*",
-  "(",
-  ")",
-  "_",
-  "-",
-  "+",
-  "=",
-  "{",
-  "[",
-  "}",
-  "]",
-  "|",
-  ":",
-  ";",
-  "<",
-  ">",
-  ".",
-  "?",
-  "/",
+  '~',
+  '`',
+  '!',
+  '@',
+  '#',
+  '$',
+  '%',
+  '^',
+  '&',
+  '*',
+  '(',
+  ')',
+  '_',
+  '-',
+  '+',
+  '=',
+  '{',
+  '[',
+  '}',
+  ']',
+  '|',
+  ':',
+  ';',
+  '<',
+  '>',
+  '.',
+  '?',
+  '/',
 ];
 
-const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-const passwordElements = [uppercaseLetters, symbols, numbers];
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 const randomNumberGenerator = (length: number) =>
   Math.floor(Math.random() * length);
@@ -109,8 +108,8 @@ const createPassword = (
     );
   } while (passwordCharacters.length + 1 <= length);
 
-  console.log(passwordCharacters.join(""));
-  return passwordCharacters.join("");
+  console.log(passwordCharacters.join(''));
+  return passwordCharacters.join('');
 };
 
 interface PasswordConfiguratorInterface {
@@ -120,7 +119,7 @@ interface PasswordConfiguratorInterface {
 const PasswordConfigurator = ({
   passwordCreated,
 }: PasswordConfiguratorInterface): JSX.Element => {
-  const [lengthValue, setLengthValue] = useState("5");
+  const [lengthValue, setLengthValue] = useState('8');
   const [passwordConditionals, setPasswordConditionals] = useState({
     useUppercase: true,
     useLowercase: true,
@@ -162,34 +161,39 @@ const PasswordConfigurator = ({
   return (
     <form className={classes.configurator} onSubmit={onSubmitForm}>
       <div className={classes.range}>
-        <label htmlFor="password-range" className={classes["range-label"]}>
+        <label htmlFor='password-range' className={classes['range-label']}>
           <h3>Character Length</h3>
           <span>{lengthValue}</span>
         </label>
         <input
-          className={classes["range-range"]}
-          id="password-length"
+          className={classes['range-range']}
+          id='password-length'
           max={20}
           min={5}
-          name="password-length"
+          name='password-length'
           onChange={onLengthChange}
-          type="range"
+          type='range'
           value={lengthValue}
         />
       </div>
 
       <div className={classes.checkboxGroup}>
         <Checkbox
-          label={"Include Uppercase Letters"}
+          label={'Include Uppercase Letters'}
           onChange={onUpperCaseActive}
         />
         <Checkbox
-          label={"Include Lowercase Letters"}
+          label={'Include Lowercase Letters'}
           onChange={onLowerCaseActive}
         />
-        <Checkbox label={"Include Numbers"} onChange={onNumbersActive} />
-        <Checkbox label={"Include Symbols"} onChange={onSymbolsActive} />
+        <Checkbox label={'Include Numbers'} onChange={onNumbersActive} />
+        <Checkbox label={'Include Symbols'} onChange={onSymbolsActive} />
       </div>
+
+      <PasswordMeasure
+        passwordLength={+lengthValue}
+        passwordConditionals={passwordConditionals}
+      />
 
       <button>Generate</button>
     </form>
