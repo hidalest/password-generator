@@ -1,6 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEventHandler, useState } from "react";
 import Checkbox from "../ui/Checkbox/Checkbox";
 import classes from "./PasswordConfigurator.module.scss";
+import PasswordMeasure from "../PasswordMeasure/PasswordMeasure";
 
 const uppercaseLetters = [
   "A",
@@ -66,8 +67,6 @@ const symbols = [
 
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
-const passwordElements = [uppercaseLetters, symbols, numbers];
-
 const randomNumberGenerator = (length: number) =>
   Math.floor(Math.random() * length);
 
@@ -109,7 +108,6 @@ const createPassword = (
     );
   } while (passwordCharacters.length + 1 <= length);
 
-  console.log(passwordCharacters.join(""));
   return passwordCharacters.join("");
 };
 
@@ -120,7 +118,7 @@ interface PasswordConfiguratorInterface {
 const PasswordConfigurator = ({
   passwordCreated,
 }: PasswordConfiguratorInterface): JSX.Element => {
-  const [lengthValue, setLengthValue] = useState("5");
+  const [lengthValue, setLengthValue] = useState("8");
   const [passwordConditionals, setPasswordConditionals] = useState({
     useUppercase: true,
     useLowercase: true,
@@ -190,6 +188,11 @@ const PasswordConfigurator = ({
         <Checkbox label={"Include Numbers"} onChange={onNumbersActive} />
         <Checkbox label={"Include Symbols"} onChange={onSymbolsActive} />
       </div>
+
+      <PasswordMeasure
+        passwordLength={+lengthValue}
+        passwordConditionals={passwordConditionals}
+      />
 
       <button>Generate</button>
     </form>

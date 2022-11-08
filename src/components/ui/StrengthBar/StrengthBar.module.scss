@@ -1,0 +1,25 @@
+@import "../../../sassStyles/variables";
+
+.bar {
+  width: 1rem;
+  height: 2.8rem;
+  border: 2px solid white;
+  margin: 0 8px;
+}
+
+.strong {
+  background-color: $green;
+}
+.medium {
+  background-color: $yellow;
+}
+.weak {
+  background-color: $orange;
+}
+.too-weak {
+  background-color: $red;
+}
+
+.transparent {
+  background-color: transparent;
+}
