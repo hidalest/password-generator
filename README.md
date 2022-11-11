@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/password-generator-OSjAy7NPOV](https://www.frontendmentor.io/solutions/password-generator-OSjAy7NPOV)
 - Live Site URL: [https://hidalest.github.io/password-generator/](https://hidalest.github.io/password-generator/)
 
 ## My process
