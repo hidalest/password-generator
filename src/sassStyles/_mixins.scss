@@ -18,9 +18,8 @@ $desktop: 1800px;
 @mixin buttonAnimation($color) {
   transition: all 0.25s ease-out;
 
-  &:hover {
+  &:active {
     color: $color;
-    transform: translateY(-1px);
     transition: all 0.25s ease-out;
     background-color: transparent;
   }

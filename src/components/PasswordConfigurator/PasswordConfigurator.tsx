@@ -1,7 +1,9 @@
 import { ChangeEvent, FormEvent, MouseEventHandler, useState } from "react";
 import Checkbox from "../ui/Checkbox/Checkbox";
 import classes from "./PasswordConfigurator.module.scss";
+import { ReactComponent as ReactLogo } from "../../assets/images/icon-arrow-right.svg";
 import PasswordMeasure from "../PasswordMeasure/PasswordMeasure";
+import arrowIcon from "../../assets/images/icon-arrow-right.svg";
 
 const uppercaseLetters = [
   "A",
@@ -194,7 +196,10 @@ const PasswordConfigurator = ({
         passwordConditionals={passwordConditionals}
       />
 
-      <button>Generate</button>
+      <button className={classes.generate}>
+        <span>Generate</span>
+        <ReactLogo />
+      </button>
     </form>
   );
 };
