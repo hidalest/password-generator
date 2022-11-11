@@ -1,10 +1,14 @@
-@import "../../../sassStyles/variables";
+@import "../../../sassstyles/variables";
+@import "../../../sassstyles/mixins";
 
 .bar {
   width: 1rem;
   height: 2.8rem;
   border: 2px solid white;
-  margin: 0 8px;
+  margin: 0 4px;
+
+  @include responsiveMax($phone) {
+  }
 }
 
 .strong {
